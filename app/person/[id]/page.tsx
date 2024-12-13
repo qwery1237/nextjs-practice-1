@@ -37,11 +37,11 @@ const getDetail = async (id: string) => {
   return data.json();
 };
 export default async function PersonDetail({
-  params: { id },
+  params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const detail: IPersonDetail = await getDetail(id);
+  const detail: IPersonDetail = await getDetail((await params).id);
 
   return (
     <div className='w-full flex flex-col items-center gap-8 py-8 *:max-w-screen-lg *:rounded-md'>
